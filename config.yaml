@@ -1,0 +1,37 @@
+image: alluxio/alluxio
+imageTag: 2.8.1
+imagePullPolicy: Always
+
+properties:
+  alluxio.master.mount.table.root.ufs: "s3://"
+  alluxio.master.mount.table.root.option.aws.accessKeyId: ""
+  alluxio.master.mount.table.root.option.aws.secretKey: ""
+  alluxio.fuse.debug.enabled: "true"
+
+master:
+  count: 1
+
+journal:
+  type: "UFS"
+  ufsType: "local"
+  folder: "/journal"
+  size: 1Gi
+  # volumeType controls the type of journal volume.
+  # It can be "persistentVolumeClaim" or "emptyDir"
+  volumeType: emptyDir
+  # Attributes to use when the journal is emptyDir
+  medium: ""
+
+shortCircuit:
+  enabled: false
+
+tieredstore:
+  levels:
+  - level: 0
+    alias: MEM
+    mediumtype: MEM
+    path: /dev/shm
+    type: emptyDir
+    quota: 1Gi
+    high: 0.95
+
