@@ -6,7 +6,6 @@ properties:
   alluxio.master.mount.table.root.ufs: "s3://"
   alluxio.master.mount.table.root.option.aws.accessKeyId: ""
   alluxio.master.mount.table.root.option.aws.secretKey: ""
-  alluxio.fuse.debug.enabled: "true"
 
 master:
   count: 1
